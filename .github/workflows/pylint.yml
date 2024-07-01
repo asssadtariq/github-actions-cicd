@@ -28,5 +28,12 @@ jobs:
 
     - name: Run pylint
       run: |
-        pylint_score=$(pylint $(find . -type f -name "*.py") --output-format=parseable | tee pylint_output.txt | grep "Your code has been rated at" | awk '{print $7}' | tr -d '/10.')
-        echo "Pylint score: $pylint_score"
+          set -o pipefail
+          pylint_output=$(find . -name "*.py" | xargs pylint || true)
+          echo "$pylint_output"
+          pylint_score=$(echo "$pylint_output" | grep "Your code has been rated at" | awk '{print $7}' | cut -d "/" -f 1)
+          echo "Pylint score: $pylint_score"
+          if (( $(echo "$pylint_score < 9.0" | bc -l) )); then
+            exit 1
+          fi
+      shell: bash
