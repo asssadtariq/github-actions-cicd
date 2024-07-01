@@ -1,9 +1,7 @@
-class Point:
-  def __init__(self):
-    self.name = "John Doe"
-
 def main():
-  p = Point()
+  """Main function"""
+  p = 12
+  print(p)
 
 if __name__ == '__main__':
   main()
