@@ -1,7 +1,9 @@
+"""Importing Modules"""
 def main():
-  """Main function"""
-  p = 12
-  print(p)
+    """Main function"""
+    p = 12
+    print(p)
 
-if __name__ == '__main__':
-  main()
+
+if __name__ == "__main__":
+    main()
